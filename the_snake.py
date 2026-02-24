@@ -65,7 +65,9 @@ class Apple(GameObject):
         super().__init__(body_color=APPLE_COLOR)
         self.randomize_position(occupied_positions or [])
 
-    def randomize_position(self, occupied_positions: list[tuple[int, int]]) -> None:
+    def randomize_position(
+        self, occupied_positions: list[tuple[int, int]]
+    ) -> None:
         # tuple[int, int], dict[str, list[tuple[int]]], int/float и т.д.
         """Разместить яблоко на поле, избегая занятых позиций."""
         while True:
