@@ -1,10 +1,9 @@
 from random import randint
-from typing import Tuple
 
 import pygame as pg
 
-Pointer = Tuple[int, int]
-Color = Tuple[int, int, int]
+Pointer = tuple[int, int]
+Color = tuple[int, int, int]
 
 SCREEN_WIDTH: int = 640
 SCREEN_HEIGHT: int = 480
@@ -12,7 +11,7 @@ GRID_SIZE: int = 20
 GRID_WIDTH: int = SCREEN_WIDTH // GRID_SIZE
 GRID_HEIGHT: int = SCREEN_HEIGHT // GRID_SIZE
 
-INITIAL_SNAKE_POSITION: Tuple[int, int] = (
+INITIAL_SNAKE_POSITION: tuple[int, int] = (
     SCREEN_WIDTH // 2,
     SCREEN_HEIGHT // 2
 )
@@ -59,16 +58,14 @@ class GameObject:
 class Apple(GameObject):
     """Класс яблока в игре «Змейка»."""
 
-    def __init__(self, occupied_positions: list[tuple[int, int]] = None):
-        # tuple[int, int], dict[str, list[tuple[int]]], int/float и т.д.
+    def __init__(self, occupied_positions: list[Pointer] = None):
         """Инициализация яблока."""
         super().__init__(body_color=APPLE_COLOR)
         self.randomize_position(occupied_positions or [])
 
     def randomize_position(
-        self, occupied_positions: list[tuple[int, int]]
+        self, occupied_positions: list[Pointer]
     ) -> None:
-        # tuple[int, int], dict[str, list[tuple[int]]], int/float и т.д.
         """Разместить яблоко на поле, избегая занятых позиций."""
         while True:
             new_position = (
@@ -93,10 +90,10 @@ class Snake(GameObject):
         """Инициализация змейки."""
         super().__init__(body_color=SNAKE_COLOR)
         self.length: int = 1
-        self.positions: list[Tuple[int, int]] = [INITIAL_SNAKE_POSITION]
+        self.positions: list[Pointer] = [INITIAL_SNAKE_POSITION]
         self.direction: Pointer = RIGHT
         self.next_direction: Pointer | None = None
-        self.last: Tuple[int, int] | None = None
+        self.last: tuple[int, int] | None = None
 
     def update_direction(self) -> None:
         """Обновить направление движения змейки."""
@@ -119,7 +116,7 @@ class Snake(GameObject):
         if len(self.positions) > self.length:
             self.positions.pop()
 
-    def get_head_position(self) -> Tuple[int, int]:
+    def get_head_position(self) -> tuple[int, int]:
         """Получить позицию головы змейки.
 
         Returns:
